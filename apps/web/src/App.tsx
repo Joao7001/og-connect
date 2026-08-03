@@ -812,9 +812,12 @@ function Profile() {
           <div>
             <h1>{m.name}</h1>
             <span className="profile-roles">
-              {m.role.split(",").map((role) => (
-                <span className="profile-role" key={role.trim()}>{role.trim()}</span>
-              ))}
+              {m.role.split(",").map((role) => {
+                const label = role.trim();
+                const normalized = label.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+                const tone = normalized.includes("fundador") ? " founder" : normalized.includes("ceo") ? " ceo" : normalized.includes("admin") ? " admin" : "";
+                return <span className={`profile-role${tone}`} key={label}>{label}</span>;
+              })}
             </span>
             <p className="profile-text">
               {m.description || "Criador da OG Connect."}

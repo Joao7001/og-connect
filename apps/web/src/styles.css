@@ -3208,6 +3208,9 @@ footer small {
 }
 .profile-roles { display: flex; flex-wrap: wrap; gap: 6px; margin: 1px 0 8px; }
 .profile-roles .profile-role { margin: 0; }
+.profile-role.founder { border-color: #facc1577; background: #facc151c; color: #fde68a; }
+.profile-role.ceo { border-color: #3b82f677; background: #3b82f61c; color: #93c5fd; }
+.profile-role.admin { border-color: #ef444477; background: #ef44441c; color: #fca5a5; }
 .profile-main .profile-text {
   margin: 5px 0 12px;
   padding: 0;
