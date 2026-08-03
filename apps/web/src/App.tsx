@@ -753,7 +753,17 @@ function Profile() {
   }, [id]);
   const m = remote
     ? memberFromApi(remote)
-    : (members.find((x) => x.id === id) ?? members[0]);
+    : (members.find((x) => x.id === id) ?? members[0] ?? {
+        id: String(id ?? "integrante"),
+        name: "Carregando perfil...",
+        handle: "",
+        role: "",
+        color: "#7C3AED",
+        initials: "OG",
+        description: "",
+        specialty: "",
+        socials: [],
+      });
   const projects = Array.isArray(remote?.projects)
     ? remote.projects.map(String)
     : [];
