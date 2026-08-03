@@ -1,0 +1,9 @@
+{
+  "name": "criadores-api",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": { "dev": "tsx watch src/server.ts", "build": "tsc", "start": "node dist/server.js", "seed": "tsx src/seed.ts" },
+  "dependencies": { "bcryptjs": "latest", "cors": "latest", "dotenv": "latest", "express": "latest", "jsonwebtoken": "latest", "mongoose": "latest", "multer": "latest", "zod": "latest" },
+  "devDependencies": { "@types/bcryptjs": "latest", "@types/cors": "latest", "@types/express": "latest", "@types/jsonwebtoken": "latest", "@types/multer": "latest", "@types/node": "latest", "tsx": "latest", "typescript": "latest" }
+}

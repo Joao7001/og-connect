@@ -1,0 +1,15 @@
+# Dependencies and generated builds
+node_modules/
+apps/*/dist/
+*.tsbuildinfo
+
+# Private configuration and credentials
+.env
+.env.*
+!.env.example
+
+# Local tooling and operating-system files
+.DS_Store
+Thumbs.db
+.vite/
+coverage/

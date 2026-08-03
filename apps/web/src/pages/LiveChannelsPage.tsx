@@ -1,0 +1,10 @@
+import { useEffect, useState } from "react";
+import { CirclePlay } from "lucide-react";
+import { api, type ApiRecord } from "../api";
+import { SectionHeading, SocialIcon } from "../components/public/Shared";
+
+export default function LiveChannelsPage() {
+  const [channels, setChannels] = useState<ApiRecord[]>([]);
+  useEffect(() => { api.liveChannels().then(setChannels).catch(() => setChannels([])); }, []);
+  return <section className="container page live-page"><SectionHeading eyebrow="TRANSMISSÕES" title="Acompanhe quem está ao vivo" text="Canais da equipe cadastrados na Twitch, YouTube e Kick." /><div className="live-channel-grid">{channels.map((channel) => { const livePlatforms = Array.isArray(channel.livePlatforms) ? channel.livePlatforms.map(String) : []; const isLive = channel.isLive === true; const isMultistream = isLive && livePlatforms.length > 1; const platformClass = isMultistream ? "multistream" : String(channel.network ?? "").toLowerCase(); return <article className={`live-channel-card ${isLive ? "is-live" : "is-offline"} platform-${platformClass}`} key={channel._id}>{typeof channel.imageUrl === "string" ? <img src={channel.imageUrl} alt="" /> : <span className="live-channel-avatar">{String(channel.name ?? "?").slice(0, 1)}</span>}<div><div className="live-channel-meta"><span className={`live-status ${isLive ? "online" : "offline"}`}>{isLive ? "AO VIVO" : "OFFLINE"}</span>{isMultistream ? <span className="live-channel-platform live-multistream">MULTISTREAM {livePlatforms.map((platform) => <SocialIcon key={platform} network={platform} official />)}</span> : <span className="live-channel-platform"><SocialIcon network={String(channel.network ?? "")} official /> {String(channel.network ?? "Canal")}</span>}</div><h2>{String(channel.name ?? "Integrante")}</h2><p>{isLive && channel.streamTitle ? String(channel.streamTitle) : String(channel.role ?? "Criador")}</p></div><a href={String(channel.url ?? "#")} target="_blank" rel="noreferrer"><CirclePlay size={18} /> {isLive ? "Assistir ao vivo" : "Abrir canal"}</a></article>; })}{!channels.length && <p>Nenhum canal de transmissão foi cadastrado ainda.</p>}</div></section>;
+}
