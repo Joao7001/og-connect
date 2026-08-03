@@ -46,7 +46,7 @@ async function request<T>(
 
 export const api = {
   login: (email: string, password: string) =>
-    request<{ token: string }>("/auth/login", {
+    request<{ token: string }>("/api/auth/login", {
       method: "POST",
       body: JSON.stringify({ email, password }),
     }),

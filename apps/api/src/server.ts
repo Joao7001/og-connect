@@ -212,7 +212,7 @@ app.get(
   }),
 );
 app.post(
-  "/auth/login",
+  ["/auth/login", "/api/auth/login"],
   asyncRoute(async (request, response) => {
     const values = z
       .object({ email: z.string().email(), password: z.string().min(1) })
