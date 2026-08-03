@@ -811,7 +811,11 @@ function Profile() {
           <Avatar member={m} large />
           <div>
             <h1>{m.name}</h1>
-            <span className="profile-role">{m.role}</span>
+            <span className="profile-roles">
+              {m.role.split(",").map((role) => (
+                <span className="profile-role" key={role.trim()}>{role.trim()}</span>
+              ))}
+            </span>
             <p className="profile-text">
               {m.description || "Criador da OG Connect."}
             </p>

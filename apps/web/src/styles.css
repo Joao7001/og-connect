@@ -3206,6 +3206,8 @@ footer small {
   font-size: 10px;
   font-weight: 700;
 }
+.profile-roles { display: flex; flex-wrap: wrap; gap: 6px; margin: 1px 0 8px; }
+.profile-roles .profile-role { margin: 0; }
 .profile-main .profile-text {
   margin: 5px 0 12px;
   padding: 0;
