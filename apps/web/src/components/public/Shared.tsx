@@ -1,5 +1,5 @@
 import type { ApiRecord } from "../../api";
-import { Accessibility, Brush, Code2, Crown, Shield, ShieldCheck, UserRound, Users } from "lucide-react";
+import { Brush, Code2, Crown, Shield, ShieldCheck, UserRound, Users } from "lucide-react";
 
 export type Member = {
   id: string; name: string; handle: string; role: string; color: string; initials: string; description: string; specialty: string;
@@ -39,8 +39,8 @@ function roleKind(role: string): RoleKind {
 
 export function RoleBadge({ role }: { role: string }) {
   const kind = roleKind(role);
-  const Icon = { founder: Crown, ceo: ShieldCheck, admin: Shield, moderator: Users, designer: Brush, developer: Code2, autism: Accessibility, member: UserRound }[kind];
-  return <span className={`role-badge role-${kind}`} title={role}><Icon size={12} strokeWidth={2.3} /><span>{role}</span></span>;
+  const Icon = { founder: Crown, ceo: ShieldCheck, admin: Shield, moderator: Users, designer: Brush, developer: Code2, member: UserRound }[kind === "autism" ? "member" : kind];
+  return <span className={`role-badge role-${kind}`} title={role}>{kind === "autism" ? <span className="role-badge-emoji" aria-hidden="true">🧩</span> : <Icon size={12} strokeWidth={2.3} />}<span>{role}</span></span>;
 }
 
 export function memberFromApi(record: ApiRecord, index = 0): Member {
