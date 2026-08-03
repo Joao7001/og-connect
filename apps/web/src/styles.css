@@ -3231,6 +3231,29 @@ footer small {
 .profile-role.founder { border-color: #facc1577; background: #facc151c; color: #fde68a; }
 .profile-role.ceo { border-color: #3b82f677; background: #3b82f61c; color: #93c5fd; }
 .profile-role.admin { border-color: #ef444477; background: #ef44441c; color: #fca5a5; }
+.role-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 25px;
+  padding: 4px 8px;
+  border: 1px solid #334155;
+  border-radius: 7px;
+  background: #17213a;
+  color: #cbd5e1;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: .01em;
+}
+.role-badge svg { flex: 0 0 auto; }
+.role-badge.role-founder { border-color: #facc1588; background: linear-gradient(135deg, #facc1526, #b4530918); color: #fde68a; }
+.role-badge.role-ceo { border-color: #60a5fa88; background: linear-gradient(135deg, #3b82f626, #1d4ed818); color: #bfdbfe; }
+.role-badge.role-admin { border-color: #f8717188; background: linear-gradient(135deg, #ef444426, #991b1b18); color: #fecaca; }
+.role-badge.role-moderator { border-color: #a78bfa88; background: #7c3aed20; color: #ddd6fe; }
+.role-badge.role-designer { border-color: #f472b688; background: #ec489920; color: #fbcfe8; }
+.role-badge.role-developer { border-color: #38bdf888; background: #0ea5e920; color: #bae6fd; }
+.role-badge.role-member { border-color: #64748b88; background: #33415530; color: #cbd5e1; }
 .profile-main .profile-text {
   margin: 5px 0 12px;
   padding: 0;

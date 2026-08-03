@@ -1,4 +1,5 @@
 import type { ApiRecord } from "../../api";
+import { Brush, Code2, Crown, Shield, ShieldCheck, UserRound, Users } from "lucide-react";
 
 export type Member = {
   id: string; name: string; handle: string; role: string; color: string; initials: string; description: string; specialty: string;
@@ -20,6 +21,25 @@ export function SocialIcon({ network, official = false }: { network: string; off
 
 export function SectionHeading({ eyebrow, title, text }: { eyebrow: string; title: string; text?: string }) {
   return <div className="heading"><span>{eyebrow}</span><h2>{title}</h2>{text && <p>{text}</p>}</div>;
+}
+
+type RoleKind = "founder" | "ceo" | "admin" | "moderator" | "designer" | "developer" | "member";
+
+function roleKind(role: string): RoleKind {
+  const normalized = role.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  if (normalized.includes("fundador") || normalized.includes("funador")) return "founder";
+  if (normalized.includes("ceo")) return "ceo";
+  if (normalized.includes("admin")) return "admin";
+  if (normalized.includes("moderador")) return "moderator";
+  if (normalized.includes("designer")) return "designer";
+  if (normalized.includes("dev") || normalized.includes("desenvolvedor")) return "developer";
+  return "member";
+}
+
+export function RoleBadge({ role }: { role: string }) {
+  const kind = roleKind(role);
+  const Icon = { founder: Crown, ceo: ShieldCheck, admin: Shield, moderator: Users, designer: Brush, developer: Code2, member: UserRound }[kind];
+  return <span className={`role-badge role-${kind}`} title={role}><Icon size={12} strokeWidth={2.3} /><span>{role}</span></span>;
 }
 
 export function memberFromApi(record: ApiRecord, index = 0): Member {

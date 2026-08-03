@@ -28,6 +28,7 @@ import { api, type AdminResource, type ApiRecord } from "./api";
 import { externalUrl, projectExternalLink } from "./lib/links";
 import { SettingsManager } from "./components/admin/SettingsManager";
 import { LinkListEditor, ListEditor } from "./components/admin/ListEditors";
+import { RoleBadge } from "./components/public/Shared";
 import TeamPage from "./pages/TeamPage";
 import LiveChannelsPage from "./pages/LiveChannelsPage";
 import ChampionshipsPage from "./pages/ChampionshipsPage";
@@ -814,9 +815,7 @@ function Profile() {
             <span className="profile-roles">
               {m.role.split(",").map((role) => {
                 const label = role.trim();
-                const normalized = label.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-                const tone = normalized.includes("fundador") ? " founder" : normalized.includes("ceo") ? " ceo" : normalized.includes("admin") ? " admin" : "";
-                return <span className={`profile-role${tone}`} key={label}>{label}</span>;
+                return label ? <RoleBadge role={label} key={label} /> : null;
               })}
             </span>
             <p className="profile-text">
