@@ -3500,6 +3500,9 @@ footer small {
   background:
     radial-gradient(circle at 92% 8%, #7c3aed42, transparent 38%),
     linear-gradient(145deg, #161b2e, #111827);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   transition: transform 0.2s ease, border-color 0.2s ease;
 }
 .championship-select-card:hover {
