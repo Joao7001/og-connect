@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { api, type ApiRecord } from "../api";
-import { Avatar, memberFromApi, RoleBadge, SectionHeading, socialData, SocialIcon } from "../components/public/Shared";
+import { Avatar, memberFromApi, RoleBadge, roleLabels, SectionHeading, socialData, SocialIcon } from "../components/public/Shared";
 
 export default function TeamPage() {
   const [records, setRecords] = useState<ApiRecord[]>([]);
@@ -24,10 +24,7 @@ export default function TeamPage() {
             <Avatar member={member} large />
             <h3>{member.name}</h3>
             <div className="member-role-list">
-              {member.role.split(",").map((role) => {
-                const label = role.trim();
-                return label ? <RoleBadge role={label} key={label} /> : null;
-              })}
+              {roleLabels(member.role).map((role) => <RoleBadge role={role} key={role} />)}
             </div>
             <div className="member-socials">
               {member.socials.slice(0, 6).map((social) => (

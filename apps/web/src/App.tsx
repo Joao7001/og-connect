@@ -28,7 +28,7 @@ import { api, type AdminResource, type ApiRecord } from "./api";
 import { externalUrl, projectExternalLink } from "./lib/links";
 import { SettingsManager } from "./components/admin/SettingsManager";
 import { LinkListEditor, ListEditor } from "./components/admin/ListEditors";
-import { RoleBadge } from "./components/public/Shared";
+import { RoleBadge, roleLabels } from "./components/public/Shared";
 import TeamPage from "./pages/TeamPage";
 import LiveChannelsPage from "./pages/LiveChannelsPage";
 import ChampionshipsPage from "./pages/ChampionshipsPage";
@@ -813,10 +813,7 @@ function Profile() {
           <div>
             <h1>{m.name}</h1>
             <span className="profile-roles">
-              {m.role.split(",").map((role) => {
-                const label = role.trim();
-                return label ? <RoleBadge role={label} key={label} /> : null;
-              })}
+              {roleLabels(m.role).map((role) => <RoleBadge role={role} key={role} />)}
             </span>
             <p className="profile-text">
               {m.description || "Criador da OG Connect."}
@@ -2772,7 +2769,7 @@ function Admin() {
                       <b className="member-sort-fallback">{String(member.name ?? "?").slice(0, 1)}</b>
                     )}
                     <span>{String(member.name ?? "Integrante")}</span>
-                    <small>{String(member.role ?? "Membro")}</small>
+                    <span className="admin-role-badges">{roleLabels(member.role ?? "Membro").map((role) => <RoleBadge key={role} role={role} />)}</span>
                   </article>
                 ))}
                 {!orderedMembers.length && <p>Cadastre integrantes para definir uma ordem.</p>}
@@ -2892,7 +2889,7 @@ function Admin() {
                       </span>
                       <b>{String(member.name ?? "Sem nome")}</b>
                     </div>
-                    <span>{String(member.role ?? "Membro")}</span>
+                    <span className="admin-role-badges">{roleLabels(member.role ?? "Membro").map((role) => <RoleBadge key={role} role={role} />)}</span>
                     <time>
                       {member.createdAt
                         ? new Date(String(member.createdAt)).toLocaleDateString(

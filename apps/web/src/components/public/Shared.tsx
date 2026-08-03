@@ -44,7 +44,12 @@ export function RoleBadge({ role }: { role: string }) {
   return <span className={`role-badge role-${kind}`} title={role}>{kind === "autism" ? <span className="role-badge-emoji" aria-hidden="true">🧩</span> : <Icon size={12} strokeWidth={2.3} />}<span>{role}</span></span>;
 }
 
+export function roleLabels(value: unknown) {
+  const values = Array.isArray(value) ? value.map(String) : [String(value ?? "")];
+  return values.flatMap((item) => item.split(/[,;]+/)).map((item) => item.trim()).filter(Boolean);
+}
+
 export function memberFromApi(record: ApiRecord, index = 0): Member {
   const name = String(record.name ?? "Criador");
-  return { id: String(record.slug ?? record._id), name, handle: `@${String(record.slug ?? "grupo").replaceAll("-", "")}`, role: String(record.role ?? record.specialty ?? "Integrante"), color: ["#4F46E5", "#3B82F6", "#22C55E", "#F59E0B"][index % 4], initials: name.split(" ").map((part) => part[0]).slice(0, 2).join("").toUpperCase(), description: String(record.description ?? ""), specialty: String(record.specialty ?? ""), socials: Array.isArray(record.socials) ? record.socials.map((social) => typeof social === "object" && social !== null && "network" in social ? { network: String((social as { network: unknown }).network), url: String((social as { url?: unknown }).url ?? "#") } : String(social)) : [], imageUrl: typeof record.imageUrl === "string" ? record.imageUrl : undefined };
+  return { id: String(record.slug ?? record._id), name, handle: `@${String(record.slug ?? "grupo").replaceAll("-", "")}`, role: roleLabels(record.role ?? record.specialty ?? "Integrante").join(", ") || "Integrante", color: ["#4F46E5", "#3B82F6", "#22C55E", "#F59E0B"][index % 4], initials: name.split(" ").map((part) => part[0]).slice(0, 2).join("").toUpperCase(), description: String(record.description ?? ""), specialty: String(record.specialty ?? ""), socials: Array.isArray(record.socials) ? record.socials.map((social) => typeof social === "object" && social !== null && "network" in social ? { network: String((social as { network: unknown }).network), url: String((social as { url?: unknown }).url ?? "#") } : String(social)) : [], imageUrl: typeof record.imageUrl === "string" ? record.imageUrl : undefined };
 }

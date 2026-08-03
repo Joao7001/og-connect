@@ -3257,6 +3257,7 @@ footer small {
 .role-badge.role-proplayer { border-color: #f59e0b99; background: linear-gradient(135deg, #f59e0b28, #b4530918); color: #fde68a; }
 .role-badge.role-autism { border-color: #67e8f988; background: #0ea5e920; color: #cffafe; }
 .role-badge.role-member { border-color: #64748b88; background: #33415530; color: #cbd5e1; }
+.admin-role-badges { display: flex; flex-wrap: wrap; gap: 5px; align-items: center; }
 .profile-main .profile-text {
   margin: 5px 0 12px;
   padding: 0;
