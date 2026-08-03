@@ -3253,6 +3253,7 @@ footer small {
 .role-badge.role-moderator { border-color: #a78bfa88; background: #7c3aed20; color: #ddd6fe; }
 .role-badge.role-designer { border-color: #f472b688; background: #ec489920; color: #fbcfe8; }
 .role-badge.role-developer { border-color: #38bdf888; background: #0ea5e920; color: #bae6fd; }
+.role-badge.role-autism { border-color: #67e8f988; background: #0ea5e920; color: #cffafe; }
 .role-badge.role-member { border-color: #64748b88; background: #33415530; color: #cbd5e1; }
 .profile-main .profile-text {
   margin: 5px 0 12px;
