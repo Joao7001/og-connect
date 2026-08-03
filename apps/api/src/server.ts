@@ -1,11 +1,13 @@
-import "dotenv/config";
 import bcrypt from "bcryptjs";
 import cors from "cors";
 import dns from "node:dns";
+import dotenv from "dotenv";
 import express, { type Request, type Response } from "express";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import multer from "multer";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { z } from "zod";
 import { requireAuth } from "./auth.js";
 import {
@@ -20,6 +22,9 @@ import {
   SiteSettings,
   User,
 } from "./models.js";
+
+const currentFile = fileURLToPath(import.meta.url);
+dotenv.config({ path: path.resolve(path.dirname(currentFile), "../.env") });
 
 const app = express();
 const port = Number(process.env.PORT ?? 4000);
