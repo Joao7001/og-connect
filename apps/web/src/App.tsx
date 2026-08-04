@@ -499,26 +499,42 @@ function HomeTemplate() {
         <p>DESTAQUES</p>
         <div>
           {projectHighlights.map(
-            ([projectId, title, action, to, color, image, imagePosition]) => (
-              <a
-                className="home-highlight"
-                style={{
-                  borderColor: color,
-                  backgroundImage: image
-                    ? `linear-gradient(#090b1422,#090b14aa), url(${image})`
-                    : undefined,
-                  backgroundPosition: imagePosition,
-                }}
-                href={to}
-                onClick={() => void api.trackProjectVisit(projectId)}
-                target={to.startsWith("http") ? "_blank" : undefined}
-                rel={to.startsWith("http") ? "noreferrer" : undefined}
-                key={title}
-              >
-                <span>{title}</span>
-                <small style={{ color, borderColor: color }}>{action}</small>
-              </a>
-            ),
+            ([projectId, title, action, to, color, image, imagePosition]) => {
+              const isExternal = to.startsWith("http");
+              const style = {
+                borderColor: color,
+                backgroundImage: image
+                  ? `linear-gradient(#090b1422,#090b14aa), url(${image})`
+                  : undefined,
+                backgroundPosition: imagePosition,
+              };
+              const handleClick = () => void api.trackProjectVisit(projectId);
+              return isExternal ? (
+                <a
+                  className="home-highlight"
+                  style={style}
+                  href={to}
+                  onClick={handleClick}
+                  target="_blank"
+                  rel="noreferrer"
+                  key={title}
+                >
+                  <span>{title}</span>
+                  <small style={{ color, borderColor: color }}>{action}</small>
+                </a>
+              ) : (
+                <Link
+                  className="home-highlight"
+                  style={style}
+                  to={to}
+                  onClick={handleClick}
+                  key={title}
+                >
+                  <span>{title}</span>
+                  <small style={{ color, borderColor: color }}>{action}</small>
+                </Link>
+              );
+            },
           )}
           {!projectHighlights.length && (
             <p className="home-empty">
