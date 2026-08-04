@@ -29,6 +29,7 @@ async function request<T>(
 ): Promise<T> {
   const response = await fetch(`${apiUrl}${path}`, {
     ...options,
+    cache: "no-store",
     headers: {
       "Content-Type": "application/json",
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
